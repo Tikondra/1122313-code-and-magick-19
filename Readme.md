@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Дарья Веденеева](https://up.htmlacademy.ru/javascript/19/user/1122313).
-* Наставник: `Неизвестно`.
+* Наставник: [Захар Овчаров](https://htmlacademy.ru/profile/id906939).
 
 ---
 
