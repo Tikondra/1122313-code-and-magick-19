@@ -15,7 +15,7 @@ window.renderStatistics = function (ctx, names, times) {
   var BAR_DOWN = CLOUD_Y + CLOUD_HEIGHT - ROW_GAP;
   var BAR_MAX = 150;
 
-  var renderCLoud = function (ctx, lineEndX, lineEndY, color) {
+  var renderCLoud = function (context, lineEndX, lineEndY, color) {
     ctx.fillStyle = color;
     ctx.beginPath();
     ctx.moveTo(lineEndX, lineEndY);
@@ -39,11 +39,11 @@ window.renderStatistics = function (ctx, names, times) {
   ctx.fillText('Ура вы победили!', CLOUD_X + FONT_GAP, CLOUD_Y);
   ctx.fillText('Список результатов: ', CLOUD_X + FONT_GAP, CLOUD_Y + ROW_GAP);
 
-  var getMaxTime = function (times) {
-    var maxTime = times[0];
-    for (var i = 1; i < times.length; i++) {
-      if (times[i] > maxTime) {
-        maxTime = times[i];
+  var getMaxTime = function (time) {
+    var maxTime = time[0];
+    for (var i = 1; i < time.length; i++) {
+      if (time[i] > maxTime) {
+        maxTime = time[i];
       }
     }
     return maxTime;
