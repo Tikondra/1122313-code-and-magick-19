@@ -3,11 +3,13 @@
 (function () {
   var URL__SAVE = 'https://js.dump.academy/code-and-magick';
   var URL__LOAD = 'https://js.dump.academy/code-and-magick/data';
+  var TIMEOUT = 10000;
+  var STATUS__OK = 200;
   var load = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
     xhr.addEventListener('load', function () {
-      if (xhr.status === 200) {
+      if (xhr.status === STATUS__OK) {
         onLoad(xhr.response);
       } else {
         onError('Статус ответа: ' + xhr.status + '' + xhr.statusText);
@@ -19,7 +21,7 @@
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
-    xhr.timeout = 10000;
+    xhr.timeout = TIMEOUT;
     xhr.open('GET', URL__LOAD);
     xhr.send();
   };
