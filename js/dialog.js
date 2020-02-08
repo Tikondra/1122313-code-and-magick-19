@@ -5,6 +5,7 @@
   var setupOpenBtn = document.querySelector('.setup-open-icon');
   var setupCloseBtn = setup.querySelector('.setup-close');
   var dialogHandle = setup.querySelector('.upload');
+  var form = setup.querySelector('.setup-wizard-form');
 
   // открытие окна настроек
   var onPopupEscPress = function (evt) {
@@ -76,5 +77,15 @@
     };
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
+  });
+  // отпрвка данных
+  var getPostForm = function () {
+    setup.classList.add('hidden');
+  };
+
+  // отправка данных
+  form.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(form), getPostForm, window.backend.onError);
+    evt.preventDefault();
   });
 })();
