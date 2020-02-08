@@ -33,32 +33,37 @@
     wizardFireballInput.value = color;
   };
   // получение рандомного мага
-  var getRandomWizard = function () {
-    return {
-      name: window.data.names[window.data.getRandomStat(window.data.names)],
-      lastName: window.data.lastNames[window.data.getRandomStat(window.data.lastNames)],
-      coatColor: window.data.coatColors[window.data.getRandomStat(window.data.coatColors)],
-      eyesColor: window.data.eyesColors[window.data.getRandomStat(window.data.eyesColors)]
-    };
-  };
+  // var getRandomWizard = function () {
+  //   return {
+  //     name: window.data.names[window.data.getRandomStat(window.data.names)],
+  //     lastName: window.data.lastNames[window.data.getRandomStat(window.data.lastNames)],
+  //     coatColor: window.data.coatColors[window.data.getRandomStat(window.data.coatColors)],
+  //     eyesColor: window.data.eyesColors[window.data.getRandomStat(window.data.eyesColors)]
+  //   };
+  // };
   // отрисовка рандомного мага
-  var renderWizard = function () {
+  var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
-    wizardElement.querySelector('.setup-similar-label').textContent = getRandomWizard().name + ' ' + getRandomWizard().lastName;
-    wizardElement.querySelector('.wizard-coat').style.fill = getRandomWizard().coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = getRandomWizard().eyesColor;
+    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
     return wizardElement;
   };
-  var fragment = document.createDocumentFragment();
-  // добавление магов в фрагмент
-  for (var i = 0; i < window.data.wizardCount; i++) {
-    fragment.appendChild(renderWizard());
-  }
-  // добавление магов на страницу
-  similarListElement.appendChild(fragment);
-  setupSimilar.classList.remove('hidden');
+  // загрузка магов
+  var loadWizards = function (wizards) {
+    var fragment = document.createDocumentFragment();
+    // добавление магов в фрагмент
+    for (var i = 0; i < window.data.wizardCount; i++) {
+      fragment.appendChild(renderWizard(wizards[i]));
+    }
+    // добавление магов на страницу
+    similarListElement.appendChild(fragment);
+    setupSimilar.classList.remove('hidden');
+  };
+
+  window.backend.load(loadWizards, window.backend.onError);
   // смена цвета плаща
   wizardCoat.addEventListener('click', function () {
     onChangeColorCoat();
